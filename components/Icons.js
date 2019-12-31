@@ -10,3 +10,9 @@ export const HeaderLogo = props => (
 export const Right = props => <AntDesign name="right" {...props} />;
 
 export const Bank = props => <FontAwesome name="bank" {...props} />;
+
+export const Operator = props => <AntDesign name="customerservice" {...props} />;
+
+export const Calendar = props => <FontAwesome name="calendar" {...props} />;
+
+export const Document = props => <AntDesign name="filetext1" {...props} />;
