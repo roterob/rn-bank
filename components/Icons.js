@@ -16,3 +16,9 @@ export const Operator = props => <AntDesign name="customerservice" {...props} />
 export const Calendar = props => <FontAwesome name="calendar" {...props} />;
 
 export const Document = props => <AntDesign name="filetext1" {...props} />;
+
+export const Home = props => <AntDesign name="home" {...props} />;
+
+export const Cash = props => <Ionicons name="ios-cash" {...props} />;
+
+export const Shopping = props => <AntDesign name="shoppingcart" {...props} />;

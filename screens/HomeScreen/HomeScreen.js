@@ -15,6 +15,7 @@ import MyAccounts from './components/MyAccounts';
 import { MonoText } from '../../components/StyledText';
 import Colors from '../../constants/Colors';
 import PremiumServices from './components/PremiumServices';
+import MyReceipts from './components/MyReceipts';
 
 export default function HomeScreen() {
   return (
@@ -22,13 +23,14 @@ export default function HomeScreen() {
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <MyAccounts />
         <PremiumServices />
+        <MyReceipts />
       </ScrollView>
     </View>
   );
 }
 
 HomeScreen.navigationOptions = {
-  title: 'Home',
+  title: 'Mis finanzas',
 };
 
 function handleHelpPress() {
