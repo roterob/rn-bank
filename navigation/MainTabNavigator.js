@@ -4,20 +4,34 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import StorybookUI from '../screens/StorybookUI';
+
+import { HeaderLogo } from '../components/Icons';
+import Colors from '../constants/Colors';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
-  default: {},
+  default: {
+    defaultNavigationOptions: {
+      headerLeft: <HeaderLogo />,
+      headerStyle: {
+        backgroundColor: Colors.tintColor,
+      },
+      headerTintColor: Colors.white,
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
+  },
 });
 
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
   },
-  config
+  config,
 );
 
 HomeStack.navigationOptions = {
@@ -40,7 +54,7 @@ const LinksStack = createStackNavigator(
   {
     Links: LinksScreen,
   },
-  config
+  config,
 );
 
 LinksStack.navigationOptions = {
@@ -52,27 +66,35 @@ LinksStack.navigationOptions = {
 
 LinksStack.path = '';
 
-const SettingsStack = createStackNavigator(
+const StorybookUIStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Storybook: StorybookUI,
   },
-  config
+  config,
 );
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+StorybookUIStack.navigationOptions = {
+  tabBarLabel: 'Storybook',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
   ),
 };
 
-SettingsStack.path = '';
+StorybookUIStack.path = '';
 
-const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
-});
+const tabNavigator = createBottomTabNavigator(
+  {
+    HomeStack,
+    LinksStack,
+    StorybookUIStack,
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: Colors.tintColor,
+      inactiveTintColor: Colors.tabIconDefault,
+    },
+  },
+);
 
 tabNavigator.path = '';
 
