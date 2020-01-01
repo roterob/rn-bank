@@ -8,22 +8,27 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Alert,
 } from 'react-native';
 
 import MyAccounts from './components/MyAccounts';
 
-import { MonoText } from '../../components/StyledText';
 import Colors from '../../constants/Colors';
 import PremiumServices from './components/PremiumServices';
 import MyReceipts from './components/MyReceipts';
+import { HeaderLogo } from '../../components/Icons';
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
+  const onReceiptClickHandler = receip => {
+    navigation.navigate('Detail', { receip });
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <MyAccounts />
         <PremiumServices />
-        <MyReceipts />
+        <MyReceipts onReceiptClick={onReceiptClickHandler} />
       </ScrollView>
     </View>
   );
@@ -31,6 +36,7 @@ export default function HomeScreen() {
 
 HomeScreen.navigationOptions = {
   title: 'Mis finanzas',
+  headerLeft: <HeaderLogo />,
 };
 
 function handleHelpPress() {

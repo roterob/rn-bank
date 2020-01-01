@@ -5,6 +5,7 @@ const thirdColor = '#EDF7F9';
 const white = '#fff';
 const black = '#000';
 const green = '#03B249';
+const grey = '#eee';
 const lightGrey = '#E0E0E0';
 
 export default {
@@ -14,6 +15,7 @@ export default {
   white,
   black,
   green,
+  grey,
   viewBackground: lightGrey,
   tintColor: primaryColor,
   tabIconDefault: grey,

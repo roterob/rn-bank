@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import Colors from '../../../constants/Colors';
 
 export const Section = ({ title, children }) => {
@@ -30,22 +30,25 @@ export const Row = ({ innerPadding = 0, style = {}, children }) => {
   );
 };
 
-export const Card = ({ style = {}, children }) => (
-  <View
-    style={[
-      {
-        elevation: 2,
-        borderRadius: 4,
-        flex: 1,
-        backgroundColor: Colors.white,
-        borderColor: Colors.borderColor,
-        borderWidth: 1,
-      },
-      style,
-    ]}
-  >
-    {children}
-  </View>
+export const Card = ({ style, children, onPress, ...props }) => (
+  <TouchableWithoutFeedback onPress={onPress}>
+    <View
+      style={[
+        {
+          elevation: 2,
+          borderRadius: 4,
+          flex: 1,
+          backgroundColor: Colors.white,
+          borderColor: Colors.borderColor,
+          borderWidth: 1,
+        },
+        style,
+      ]}
+      {...props}
+    >
+      {children}
+    </View>
+  </TouchableWithoutFeedback>
 );
 
 const styles = StyleSheet.create({

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 
 import Colors from '../../../constants/Colors';
 import { Section, Card } from './Layout';
@@ -7,16 +7,22 @@ import { amountFormatter } from '../../../utilities/formatters';
 import * as Icons from '../../../components/Icons';
 
 const data = [
-  { icon: 'Shopping', origin: 'Fundación Unicef Comiteeeee asdf', amount: 20, date: '27 Dic' },
-  { icon: 'Cash', origin: 'Red Ofisat S.I.', amount: 156.76, date: '19 Dic' },
-  { icon: 'Home', origin: 'Gas Natural Servicios Sdg', amount: 115.82, date: '18 Dic' },
+  {
+    id: 1,
+    icon: 'Shopping',
+    origin: 'Fundación Unicef Comite.',
+    amount: 20,
+    date: '27 Dic',
+  },
+  { id: 2, icon: 'Cash', origin: 'Red Ofisat S.I.', amount: 156.76, date: '19 Dic' },
+  { id: 3, icon: 'Home', origin: 'Gas Natural Servicios Sdg', amount: 115.82, date: '18 Dic' },
 ];
 
-const ReceipCard = ({ icon, origin, amount, date }) => {
+const ReceipCard = ({ icon, origin, amount, date, onPress }) => {
   const Icon = Icons[icon];
 
   return (
-    <Card style={[styles.card]}>
+    <Card style={[styles.card]} onPress={onPress}>
       <View style={styles.iconBorder}>
         <Icon style={styles.cardIcon} />
       </View>
@@ -29,15 +35,17 @@ const ReceipCard = ({ icon, origin, amount, date }) => {
   );
 };
 
-const MyReceipts = () => (
-  <Section title="Mis recibos">
-    <ScrollView horizontal={true}>
-      {data.map(r => (
-        <ReceipCard {...r} />
-      ))}
-    </ScrollView>
-  </Section>
-);
+const MyReceipts = ({ onReceiptClick }) => {
+  return (
+    <Section title="Mis recibos">
+      <ScrollView horizontal={true}>
+        {data.map(r => (
+          <ReceipCard key={r.id} {...r} onPress={() => onReceiptClick(r)} />
+        ))}
+      </ScrollView>
+    </Section>
+  );
+};
 
 const styles = StyleSheet.create({
   card: {

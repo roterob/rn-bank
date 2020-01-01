@@ -5,17 +5,15 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
 import StorybookUI from '../screens/StorybookUI';
+import DetailScreen from '../screens/DetailScreen';
 
-import { HeaderLogo } from '../components/Icons';
 import Colors from '../constants/Colors';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
   default: {
     defaultNavigationOptions: {
-      headerLeft: <HeaderLogo />,
       headerStyle: {
         backgroundColor: Colors.tintColor,
       },
@@ -30,6 +28,7 @@ const config = Platform.select({
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
+    Detail: DetailScreen,
   },
   config,
 );
@@ -50,21 +49,21 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = '';
 
-const LinksStack = createStackNavigator(
+const DetailStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Links: DetailScreen,
   },
   config,
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+DetailStack.navigationOptions = {
+  tabBarLabel: 'Detail',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
   ),
 };
 
-LinksStack.path = '';
+DetailStack.path = '';
 
 const StorybookUIStack = createStackNavigator(
   {
@@ -85,7 +84,7 @@ StorybookUIStack.path = '';
 const tabNavigator = createBottomTabNavigator(
   {
     HomeStack,
-    LinksStack,
+    DetailStack,
     StorybookUIStack,
   },
   {
