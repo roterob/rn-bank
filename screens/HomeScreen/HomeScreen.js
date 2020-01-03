@@ -1,15 +1,6 @@
 import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Alert,
-} from 'react-native';
+import { Image, Platform, ScrollView, StyleSheet, View } from 'react-native';
 
 import MyAccounts from './components/MyAccounts';
 
@@ -18,7 +9,11 @@ import PremiumServices from './components/PremiumServices';
 import MyReceipts from './components/MyReceipts';
 import { HeaderLogo } from '../../components/Icons';
 
+import useState from './state';
+
 export default function HomeScreen({ navigation }) {
+  const { accounts, lastMovements, receipts, setCurrentAccount } = useState();
+
   const onReceiptClickHandler = receip => {
     navigation.navigate('Detail', { receip });
   };
@@ -26,9 +21,9 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.contentContainer}>
-        <MyAccounts />
+        <MyAccounts data={{ accounts, lastMovements }} />
         <PremiumServices />
-        <MyReceipts onReceiptClick={onReceiptClickHandler} />
+        <MyReceipts data={receipts} onReceiptClick={onReceiptClickHandler} />
       </ScrollView>
     </View>
   );

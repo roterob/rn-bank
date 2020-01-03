@@ -15,13 +15,13 @@ const slideHeight = 80;
 const slideWidth = wp(75);
 const itemHorizontalMargin = wp(2);
 
-const accountsData = [
-  { account: 'ES6621000418401234567891', amount: 4680.78 },
-  { account: 'ES9420805801101234567891', amount: 160.0 },
-];
+const AccountsCarusel = ({ data: accountsData, onChange }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
 
-const AccountsCarusel = () => {
-  const [activeIndex, setActiveIndes] = useState(0);
+  const handleSnapToItem = index => {
+    onChange(accountsData[index].account);
+    setActiveIndex(index);
+  };
 
   return (
     <View style={styles.container}>
@@ -40,7 +40,7 @@ const AccountsCarusel = () => {
             </View>
           </View>
         )}
-        onSnapToItem={index => setActiveIndes(index)}
+        onSnapToItem={handleSnapToItem}
       />
       <Pagination
         dotsLength={accountsData.length}

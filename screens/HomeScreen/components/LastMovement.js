@@ -2,30 +2,27 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Colors from '../../../constants/Colors';
 import { amountFormatter } from '../../../utilities/formatters';
+import FadeInView from '../../../components/FadeInView';
 
-const data = [
-  { _id: 1, date: 'Lunes', concept: 'Reint. cajero', amount: -160.0 },
-  { _id: 2, date: '10 Dic', concept: 'Farmacia Reviejo', amount: -10.44 },
-  { _id: 3, date: '10 Dic', concept: 'Factura F201900123', amount: 955.59 },
-];
-
-const LastMovements = props => (
+const LastMovements = ({ data }) => (
   <View style={styles.container}>
     <View style={styles.header}>
       <Text style={{ color: Colors.secondaryTextColor }}>Últimos movimientos</Text>
       <Text style={{ color: Colors.linkTextColor, textAlign: 'right', flex: 1 }}>Ver todos</Text>
     </View>
-    {data.map(r => (
-      <View key={r._id} style={styles.row}>
-        <Text style={styles.cell1}>{r.date}</Text>
-        <Text style={styles.cell2}>{r.concept}</Text>
-        <Text
-          style={[styles.cell3, { color: r.amount > 0 ? Colors.green : Colors.primaryTextColor }]}
-        >
-          {amountFormatter(r.amount)}
-        </Text>
-      </View>
-    ))}
+    <FadeInView>
+      {data.map(r => (
+        <View key={r._id} style={styles.row}>
+          <Text style={styles.cell1}>{r.date}</Text>
+          <Text style={styles.cell2}>{r.concept}</Text>
+          <Text
+            style={[styles.cell3, { color: r.amount > 0 ? Colors.green : Colors.primaryTextColor }]}
+          >
+            {amountFormatter(r.amount)}
+          </Text>
+        </View>
+      ))}
+    </FadeInView>
   </View>
 );
 
